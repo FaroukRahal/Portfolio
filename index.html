@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--
+  Layout and styling adapted from "Simple Portfolio" by Adem Bendjama
+  (https://github.com/AdemBendjama/Portfolio), licensed under GPL-3.0. See LICENSE.
+  Modified: content replaced, EN/FR toggle added, responsive rules added.
+-->
+<html lang="en">
+<head>
+      <meta charset="utf-8">
+      <title>Farouk Rahal | AI / ML Engineer</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Farouk Rahal, M.Sc. AI Systems student at EPITA Paris, building machine learning systems end to end.">
+      <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+      <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23FBE850'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='28' font-weight='700' text-anchor='middle' fill='black'%3EFR%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+      <div class="section-1">
+            <div class="header">
+                  <div class="navbar">
+                        <div class="profile-pic"><a href="https://github.com/FaroukRahal" target="_blank" rel="noopener"><span class="avatar" aria-label="Farouk Rahal">FR</span></a></div>
+                        <div class="name"><a href="#">Farouk Rahal</a></div>
+                        <div class="navbar-sections">
+                              <a href="Farouk_Rahal_CV.pdf" download data-i18n="nav.cv">Download CV</a>
+                              <a href="#projects" data-i18n="nav.projects">Projects</a>
+                              <a href="#about" data-i18n="nav.about">About</a>
+                        </div>
+                        <div class="navbar-call-to-action"><a href="mailto:farouk_rahal@yahoo.com" data-i18n="nav.contact">Contact Me</a>
+                        </div>
+                  </div>
+                  <div class="intro-body">
+                        <div class="introduction">
+                              <div class="title" data-i18n="intro.title">Building Machine Learning Systems End to End</div>
+                              <div class="description" data-i18n-lines="intro.description"></div>
+                        </div>
+                        <img src="Assets/pixel_coffee_black-background.gif" alt="" height="100">
+                  </div>
+            </div>
+      </div>
+
+      <div class="background-img"></div>
+
+      <div class="section-2">
+            <div class="title" id="projects" data-i18n="projects.title">Projects</div>
+            <div class="project-slider">
+                  <div id="project-list" class="project-list"></div>
+                  <div class="slider-controls">
+                        <button type="button" class="slider-arrow" id="slider-prev" data-i18n-label="slider.prev" aria-label="Previous project">&larr;</button>
+                        <div class="slider-dots" id="slider-dots"></div>
+                        <button type="button" class="slider-arrow" id="slider-next" data-i18n-label="slider.next" aria-label="Next project">&rarr;</button>
+                  </div>
+            </div>
+      </div>
+
+      <div class="section-3" id="about">
+            <div class="question" data-i18n="cta.question">Interested in working with me?</div>
+            <div class="proposal" data-i18n-lines="cta.proposal"></div>
+            <div class="call-to-action"><a href="mailto:farouk_rahal@yahoo.com" data-i18n="nav.contact">Contact Me</a></div>
+      </div>
+
+      <div class="section-4">
+            <div class="name"><a href="#">Farouk Rahal</a></div>
+
+            <div class="footer-socials">
+                  <a href="https://github.com/FaroukRahal" target="_blank" rel="noopener"><img src="Assets/github-logo-white.svg"
+                              alt="GitHub" width="28"></a>
+                  <a href="https://linkedin.com/in/farouk-rahal" target="_blank" rel="noopener"><img
+                              src="Assets/linkedin-logo-white.png" alt="LinkedIn" width="28"></a>
+            </div>
+      </div>
+
+      <script src="content.js"></script>
+      <script src="main.js"></script>
+</body>
+</html>

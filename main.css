@@ -1,0 +1,693 @@
+/*
+  Adapted from "Simple Portfolio" by Adem Bendjama (https://github.com/AdemBendjama/Portfolio),
+  licensed under GPL-3.0. See LICENSE.
+*/
+
+/***************! Importing FONTS ***************/
+@import url('https://fonts.googleapis.com/css2?family=Chivo+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600&display=swap');
+
+/***************! Apply Border-Box Property ***************/
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+/***************! HTML ***************/
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    color: white;
+    font-family: 'Chivo Mono', monospace;
+    background-color: black;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(200, 200, 200);
+}
+
+a:hover {
+    color: rgb(255, 255, 255);
+}
+
+a:active {
+    color: rgb(171, 171, 171);
+}
+
+.navbar .name a,
+.section-4 .name a {
+    color: rgb(255, 255, 255);
+}
+
+.navbar .name a:hover,
+.section-4 .name a:hover {
+    color: rgb(200, 200, 200);
+}
+
+.name a {
+    cursor: default;
+}
+
+/***************! Section-1 ***************/
+.section-1 {
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+    background-color: black;
+}
+
+/*****! Navbar *****/
+
+.navbar {
+    padding: 5% 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar .profile-pic {
+    margin-right: -100px;
+}
+
+.avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #2E3038;
+    border: solid white 2px;
+    color: white;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 22px;
+}
+
+.navbar .name {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 22px;
+}
+
+.navbar .navbar-sections {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.navbar .navbar-call-to-action {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 22px;
+}
+
+.navbar .navbar-call-to-action a {
+    display: inline-block;
+    padding: 20px 30px;
+    border-radius: 10px;
+    color: black;
+    background-color: #FBE850;
+}
+
+/*****! Introduction *****/
+.introduction {
+    padding: 9% 5% 21% 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.introduction .title {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 52px;
+}
+
+.introduction .description {
+    line-height: 28px;
+}
+
+.intro-body {
+    display: flex;
+    align-items: center;
+    gap: 100px;
+}
+
+/***************! Background Image ***************/
+.background-img {
+    height: 486px;
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+    background-image: url(Assets/cacao_and_coffee_shop.gif);
+    /* Black space below, enough that the GIF can sit alone on screen while scrolling past it. */
+    margin-bottom: max(0px, calc((100vh - 486px) / 2));
+}
+
+/* Desktop: soft top and bottom edges that melt into the black; main.js fades the GIF in and out
+   as it scrolls through the screen. */
+@media (min-width: 761px) {
+    .background-img {
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%);
+        mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%);
+        will-change: opacity;
+    }
+}
+
+/***************! Section-2 ***************/
+.section-2 {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 10%;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 70px;
+}
+
+.section-2 .title {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 42px;
+    padding-top: 4%;
+}
+
+/*****! projects *****/
+/*****! horizontal slider *****/
+.project-slider {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.project-list {
+    position: relative;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: auto auto;
+    grid-auto-columns: min(800px, calc(100vw - 32px));
+    column-gap: 48px;
+    row-gap: 20px;
+    width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 0 max(16px, calc(50% - 400px));
+    scroll-padding: 0 max(16px, calc(50% - 400px));
+    scrollbar-width: none;
+    cursor: grab;
+}
+
+.project-list::-webkit-scrollbar {
+    display: none;
+}
+
+.project-list.is-dragging {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+    cursor: grabbing;
+    user-select: none;
+}
+
+.project-list.is-dragging .project-thumbnail {
+    pointer-events: none;
+}
+
+/* Each project spans both rows and borrows them (subgrid): a one-line title gets the same
+   row height as a two-line one, so every box starts at the same height. */
+.section-2 .project {
+    grid-row: span 2;
+    display: grid;
+    grid-template-rows: subgrid;
+    min-width: 0;
+    scroll-snap-align: center;
+    transform-origin: center center;
+    will-change: transform, opacity;
+}
+
+.project-thumbnail img {
+    -webkit-user-drag: none;
+}
+
+.slider-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 0 16px;
+}
+
+.slider-arrow {
+    width: 52px;
+    height: 52px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    border: solid white 2px;
+    background: black;
+    color: white;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.slider-arrow:hover,
+.slider-arrow:focus-visible {
+    background-color: #FBE850;
+    border-color: #FBE850;
+    color: black;
+    outline: none;
+}
+
+.slider-dots {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.slider-dot {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border-radius: 50%;
+    border: 0;
+    background-color: rgb(90, 90, 90);
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.slider-dot:hover {
+    background-color: rgb(200, 200, 200);
+}
+
+.slider-dot[aria-current="true"] {
+    background-color: #FBE850;
+    transform: scale(1.3);
+}
+
+.slider-dot:focus-visible {
+    outline: 2px solid #FBE850;
+    outline-offset: 3px;
+}
+
+.section-2 .project-description {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 15px;
+    align-self: end;
+}
+
+/*****! project box: media, blurred on hover, with details on top *****/
+.project-thumbnail {
+    position: relative;
+    align-self: start;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 32px;
+    border: solid white 2px;
+    overflow: hidden;
+    background-color: #111;
+    outline: none;
+}
+
+.project-thumbnail > img,
+.project-thumbnail > video,
+.project-placeholder {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.35s ease, transform 0.35s ease;
+}
+
+.project-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    color: rgb(90, 90, 90);
+}
+
+.project-overlay {
+    position: absolute;
+    inset: 0;
+    padding: 32px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    background-color: rgba(0, 0, 0, 0.55);
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.project-thumbnail:hover > img,
+.project-thumbnail:hover > video,
+.project-thumbnail:hover > .project-placeholder,
+.project-thumbnail:focus-visible > img,
+.project-thumbnail:focus-visible > video,
+.project-thumbnail:focus-visible > .project-placeholder,
+.project-thumbnail.is-open > img,
+.project-thumbnail.is-open > video,
+.project-thumbnail.is-open > .project-placeholder {
+    filter: blur(10px) brightness(0.6);
+    transform: scale(1.06);
+}
+
+.project-thumbnail:hover .project-overlay,
+.project-thumbnail:focus-visible .project-overlay,
+.project-thumbnail.is-open .project-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+.project-thumbnail:focus-visible {
+    border-color: #FBE850;
+}
+
+/* Side projects in the slider stay plain until they're slid to the centre. */
+.section-2 .project:not(.is-current) .project-thumbnail {
+    cursor: pointer;
+}
+
+.section-2 .project:not(.is-current) .project-thumbnail > img,
+.section-2 .project:not(.is-current) .project-thumbnail > video,
+.section-2 .project:not(.is-current) .project-thumbnail > .project-placeholder {
+    filter: none;
+    transform: none;
+}
+
+.section-2 .project:not(.is-current) .project-overlay,
+.section-2 .project:not(.is-current) .project-hint {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.project-meta {
+    margin: 0;
+    font-size: 14px;
+    color: rgb(200, 200, 200);
+}
+
+.project-meta .team {
+    color: #FBE850;
+}
+
+.project-summary {
+    margin: 0;
+    font-size: 15px;
+    line-height: 23px;
+    color: white;
+}
+
+/*****! project stats *****/
+.project-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 0;
+}
+
+.project-stats .stat {
+    padding: 10px 14px;
+    border-radius: 14px;
+    border: solid white 2px;
+    min-width: 0;
+}
+
+.project-stats dt {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 20px;
+    color: #FBE850;
+}
+
+.project-stats dd {
+    margin: 4px 0 0;
+    font-size: 12px;
+    line-height: 16px;
+    color: rgb(200, 200, 200);
+}
+
+/*****! project tags *****/
+.project-tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.project-tags li {
+    padding: 4px 10px;
+    border-radius: 8px;
+    background-color: rgba(46, 48, 56, 0.9);
+    font-size: 13px;
+    color: rgb(220, 220, 220);
+}
+
+/*****! touch screens: tap the box instead of hovering *****/
+.project-hint {
+    display: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .project-hint {
+        display: block;
+        position: absolute;
+        right: 14px;
+        bottom: 14px;
+        padding: 4px 10px;
+        border-radius: 8px;
+        background-color: rgba(0, 0, 0, 0.6);
+        font-size: 12px;
+        color: rgb(200, 200, 200);
+    }
+
+    .project-thumbnail.is-open .project-hint {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .project-thumbnail > img,
+    .project-thumbnail > video,
+    .project-placeholder,
+    .project-overlay {
+        transition: none;
+    }
+
+    .project-list {
+        scroll-behavior: auto;
+    }
+}
+
+/***************! Section-3 ***************/
+.section-3 {
+    min-height: 335px;
+    width: 100%;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    padding-left: 10%;
+    padding-right: 10%;
+    background-color: #c3c3c3;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    color: black;
+}
+
+/*****! Call To Action *****/
+
+.section-3 .question {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 42px;
+}
+
+.section-3 .call-to-action {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 22px;
+    margin-top: 25px;
+}
+
+.section-3 .call-to-action a {
+    display: inline-block;
+    padding: 20px 30px;
+    border-radius: 10px;
+    color: black;
+    background-color: #FBE850;
+}
+
+/***************! Section-4 ***************/
+.section-4 {
+    height: 90px;
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+    background-color: #2E3038;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.section-4 .name {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 22px;
+}
+
+.section-4 .footer-socials {
+    display: flex;
+    gap: 20px;
+}
+
+/***************! Smaller screens ***************/
+@media (max-width: 1100px) {
+    .navbar {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .navbar .profile-pic {
+        margin-right: 0;
+    }
+
+    .navbar .name {
+        margin-right: auto;
+    }
+
+    .intro-body {
+        gap: 40px;
+    }
+}
+
+@media (max-width: 760px) {
+    body {
+        font-size: 16px;
+    }
+
+    .section-1,
+    .section-3,
+    .section-4,
+    .background-img {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .navbar {
+        padding-top: 24px;
+    }
+
+    .navbar .navbar-sections {
+        order: 3;
+        width: 100%;
+        gap: 20px;
+    }
+
+    .navbar .navbar-call-to-action {
+        font-size: 18px;
+    }
+
+    .navbar .navbar-call-to-action a,
+    .section-3 .call-to-action a {
+        padding: 14px 22px;
+    }
+
+    .intro-body {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 0;
+        padding-top: 40px;
+    }
+
+    .introduction {
+        padding: 24px 0 64px;
+    }
+
+    .introduction .title {
+        font-size: 36px;
+    }
+
+    .background-img {
+        height: 260px;
+        background-size: auto 100%;
+        margin-bottom: 0;
+    }
+
+    .section-2 {
+        gap: 40px;
+        padding-bottom: 64px;
+    }
+
+    .section-2 .title {
+        font-size: 34px;
+        padding-top: 40px;
+    }
+
+    .project-list {
+        column-gap: 16px;
+    }
+
+    .slider-arrow {
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+    }
+
+    .section-2 .project-description {
+        font-size: 23px;
+    }
+
+    .project-thumbnail {
+        border-radius: 20px;
+    }
+
+    /* On small screens the open box grows to fit the details instead of scrolling inside. */
+    .project-thumbnail.is-open {
+        aspect-ratio: auto;
+        min-height: 200px;
+    }
+
+    .project-thumbnail.is-open .project-overlay {
+        position: relative;
+        inset: auto;
+        padding: 20px;
+    }
+
+    .project-overlay {
+        padding: 20px;
+    }
+
+    .project-stats {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .section-3 {
+        padding-top: 48px;
+        padding-bottom: 48px;
+    }
+
+    .section-3 .question {
+        font-size: 30px;
+    }
+
+    .section-4 .name {
+        font-size: 18px;
+    }
+}
