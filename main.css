@@ -77,17 +77,13 @@ a:active {
 }
 
 .avatar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
+    display: block;
+    width: 78px;
+    height: 78px;
     border-radius: 50%;
-    background-color: #2E3038;
     border: solid white 2px;
-    color: white;
-    font-family: 'Chakra Petch', sans-serif;
-    font-size: 22px;
+    object-fit: cover;
+    background-color: #2E3038;
 }
 
 .navbar .name {
@@ -137,6 +133,78 @@ a:active {
     gap: 100px;
 }
 
+/*****! Coffee cup (snow switch) *****/
+.coffee-toggle {
+    flex: 0 0 auto;
+    padding: 0;
+    border: 0;
+    background: none;
+    line-height: 0;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.coffee-toggle img {
+    transition: transform 0.2s ease;
+}
+
+.coffee-toggle:hover img {
+    transform: scale(1.06);
+}
+
+.coffee-toggle:focus-visible {
+    outline: 2px solid #FBE850;
+    outline-offset: 6px;
+}
+
+/*****! Wind sound button (floats in the corner while the snow is on) *****/
+.wind-toggle {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 6;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: solid white 2px;
+    border-radius: 10px;
+    background: black;
+    color: white;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.wind-toggle[hidden] {
+    display: none;
+}
+
+.wind-toggle:hover,
+.wind-toggle:focus-visible {
+    border-color: #FBE850;
+    outline: none;
+}
+
+.wind-toggle[aria-pressed="true"] {
+    background: #FBE850;
+    border-color: #FBE850;
+    color: black;
+}
+
+/* sound waves only while the wind is on */
+.wind-toggle[aria-pressed="false"] .wind-toggle__waves {
+    opacity: 0.25;
+}
+
+@media (max-width: 760px) {
+    .wind-toggle {
+        right: 16px;
+        bottom: 16px;
+    }
+}
+
 /***************! Background Image ***************/
 .background-img {
     height: 486px;
@@ -144,17 +212,60 @@ a:active {
     padding-left: 10%;
     padding-right: 10%;
     background-image: url(Assets/cacao_and_coffee_shop.gif);
-    /* Black space below, enough that the GIF can sit alone on screen while scrolling past it. */
-    margin-bottom: max(0px, calc((100vh - 486px) / 2));
+    /* Black space above, and a small gap below before the contact section. */
+    margin-top: max(0px, calc((100vh - 486px) / 2));
+    margin-bottom: 56px;
 }
 
-/* Desktop: soft top and bottom edges that melt into the black; main.js fades the GIF in and out
-   as it scrolls through the screen. */
+/* Desktop: the scene is extended upwards with 360px of new sky that starts in the GIF's own mint
+   colour (#d8f1dc) and deepens into the black above. The GIF's bottom edge sits directly on the
+   contact section. main.js fades the whole thing in as it scrolls up the screen. */
 @media (min-width: 761px) {
     .background-img {
-        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%);
-        mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%);
+        height: calc(360px + 486px); /* new sky + the GIF */
+        margin-top: 96px;
+        background-image:
+            url(Assets/cacao_and_coffee_shop.gif),
+            linear-gradient(to top, #d8f1dc 0%, #a9cfc2 22%, #5f8a82 50%, #1c302d 80%, #000 100%);
+        background-position: left bottom, left top;
+        background-repeat: repeat-x, no-repeat;
+        background-size: auto 486px, 100% 360px;
+        margin-bottom: 0;
         will-change: opacity;
+    }
+
+    /* Compact contact section ("body" makes this win over the .section-3 rule further down). */
+    body .section-3 {
+        min-height: 0;
+        padding-top: 32px;
+        padding-bottom: 32px;
+        gap: 6px;
+        /* Heading and line on the left, Contact Me on the right, centred on the two lines. */
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "question button"
+            "proposal button";
+        column-gap: 40px;
+        align-content: center;
+    }
+
+    body .section-3 .question {
+        grid-area: question;
+    }
+
+    body .section-3 .proposal {
+        grid-area: proposal;
+    }
+
+    body .section-3 .call-to-action {
+        grid-area: button;
+        align-self: center;
+        margin-top: 0;
+    }
+
+    body .section-3 .call-to-action a {
+        padding: 14px 26px;
     }
 }
 
@@ -350,7 +461,8 @@ a:active {
     flex-direction: column;
     justify-content: center;
     gap: 16px;
-    background-color: rgba(0, 0, 0, 0.55);
+    background-color: rgba(0, 0, 0, 0.45);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
     overflow-y: auto;
     opacity: 0;
     visibility: hidden;
@@ -366,8 +478,8 @@ a:active {
 .project-thumbnail.is-open > img,
 .project-thumbnail.is-open > video,
 .project-thumbnail.is-open > .project-placeholder {
-    filter: blur(10px) brightness(0.6);
-    transform: scale(1.06);
+    filter: blur(3px) brightness(0.8);
+    transform: scale(1.02);
 }
 
 .project-thumbnail:hover .project-overlay,
@@ -498,6 +610,17 @@ a:active {
     }
 }
 
+/***************! Snow ***************/
+/* See-through layer over the whole page (main.js draws the flakes). It never blocks clicks or hovers. */
+.snow {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
 /***************! Section-3 ***************/
 .section-3 {
     min-height: 335px;
@@ -626,6 +749,7 @@ a:active {
     .background-img {
         height: 260px;
         background-size: auto 100%;
+        margin-top: 48px;
         margin-bottom: 0;
     }
 
@@ -679,8 +803,14 @@ a:active {
     }
 
     .section-3 {
-        padding-top: 48px;
-        padding-bottom: 48px;
+        min-height: 0;
+        padding-top: 18px;
+        padding-bottom: 18px;
+        gap: 10px;
+    }
+
+    .section-3 .call-to-action {
+        margin-top: 12px;
     }
 
     .section-3 .question {

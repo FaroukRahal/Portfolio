@@ -18,7 +18,7 @@
       <div class="section-1">
             <div class="header">
                   <div class="navbar">
-                        <div class="profile-pic"><a href="https://github.com/FaroukRahal" target="_blank" rel="noopener"><span class="avatar" aria-label="Farouk Rahal">FR</span></a></div>
+                        <div class="profile-pic"><a href="https://github.com/FaroukRahal" target="_blank" rel="noopener"><img class="avatar" src="Assets/profile.jpg" alt="Farouk Rahal" width="78" height="78"></a></div>
                         <div class="name"><a href="#">Farouk Rahal</a></div>
                         <div class="navbar-sections">
                               <a href="Farouk_Rahal_CV.pdf" download data-i18n="nav.cv">Download CV</a>
@@ -33,12 +33,12 @@
                               <div class="title" data-i18n="intro.title">Building Machine Learning Systems End to End</div>
                               <div class="description" data-i18n-lines="intro.description"></div>
                         </div>
-                        <img src="Assets/pixel_coffee_black-background.gif" alt="" height="100">
+                        <button type="button" class="coffee-toggle" aria-pressed="false" aria-label="Insert coffee: start the snow">
+                              <img src="Assets/pixel_coffee_black-background.gif" alt="" height="100">
+                        </button>
                   </div>
             </div>
       </div>
-
-      <div class="background-img"></div>
 
       <div class="section-2">
             <div class="title" id="projects" data-i18n="projects.title">Projects</div>
@@ -51,6 +51,8 @@
                   </div>
             </div>
       </div>
+
+      <div class="background-img"></div>
 
       <div class="section-3" id="about">
             <div class="question" data-i18n="cta.question">Interested in working with me?</div>
@@ -68,6 +70,14 @@
                               src="Assets/linkedin-logo-white.png" alt="LinkedIn" width="28"></a>
             </div>
       </div>
+
+      <button type="button" class="wind-toggle" aria-pressed="false" hidden>
+            <svg class="wind-toggle__icon" viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" shape-rendering="crispEdges">
+                  <path fill="currentColor" d="M1 6h3v4H1zM4 5h2v6H4zM6 4h2v8H6zM8 2h1v12H8z"/>
+                  <path class="wind-toggle__waves" fill="currentColor" d="M11 6h1v4h-1zM13 4h1v8h-1z"/>
+            </svg>
+            <span data-i18n="wind.label">Wind</span>
+      </button>
 
       <script src="content.js"></script>
       <script src="main.js"></script>

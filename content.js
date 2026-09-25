@@ -2,13 +2,17 @@
 // To add a project, copy one entry in PROJECTS and edit it.
 // To add a screenshot or demo video, put the file in Assets/projects/ and fill in `media`:
 //   media: { type: "image", src: "Assets/projects/steam-recommender.png", alt: { en: "...", fr: "..." } },
-//   media: { type: "video", src: "Assets/projects/steam-recommender.mp4" },   (plays muted on loop, like a GIF)
+//   media: { type: "video", src: "Assets/projects/steam-recommender.mp4", poster: "Assets/projects/steam-recommender.jpg" },
+//   (plays muted on loop, like a GIF, while on screen; the poster shows until it starts)
 
 const UI = {
   en: {
     "meta.title": "Farouk Rahal | AI / ML Engineer",
     "meta.description": "Farouk Rahal, M.Sc. AI Systems student at EPITA Paris, building machine learning systems end to end.",
     "nav.cv": "Download CV",
+    "coffee.start": "Insert coffee: start the snow",
+    "coffee.stop": "Stop the snow",
+    "wind.label": "Wind",
     "nav.projects": "Projects",
     "nav.about": "About",
     "nav.contact": "Contact Me",
@@ -35,6 +39,9 @@ const UI = {
     "meta.title": "Farouk Rahal | Ingénieur IA / ML",
     "meta.description": "Farouk Rahal, étudiant en M.Sc. AI Systems à l'EPITA Paris, conçoit des systèmes de machine learning de bout en bout.",
     "nav.cv": "Télécharger le CV",
+    "coffee.start": "Insérer un café : lancer la neige",
+    "coffee.stop": "Arrêter la neige",
+    "wind.label": "Vent",
     "nav.projects": "Projets",
     "nav.about": "À propos",
     "nav.contact": "Me contacter",
@@ -62,7 +69,11 @@ const UI = {
 const PROJECTS = [
   {
     id: "rag-hackathon",
-    media: null,
+    media: {
+      type: "image",
+      src: "Assets/projects/rag-hackathon.png",
+      alt: { en: "Retrieval-augmented generation for LLMs", fr: "Génération augmentée par récupération pour les LLM" },
+    },
     team: null,
     title: {
       en: "Multi-Agent RAG Assistant for Financial Reports",
@@ -119,7 +130,7 @@ const PROJECTS = [
   },
   {
     id: "archivelens",
-    media: null,
+    media: { type: "video", src: "Assets/projects/archivelens-cropped.webm", poster: "Assets/projects/archivelens-poster.jpg" },
     team: null,
     title: {
       en: "ArchiveLens: Natural-Language Visual Search",
@@ -131,8 +142,8 @@ const PROJECTS = [
     },
     metrics: [],
     summary: {
-      en: "A visual search app that finds anything in photos and videos from a plain-English description, with confidence scores you can trust.",
-      fr: "Une application de recherche visuelle qui retrouve n'importe quel élément dans des photos et des vidéos à partir d'une simple description, avec des scores de confiance fiables.",
+      en: "An extension of our research on open-vocabulary detection and confidence calibration: a visual search app that finds anything in photos and videos from a plain-English description, with confidence scores you can trust.",
+      fr: "Le prolongement de nos travaux sur la détection open-vocabulary et la calibration de la confiance : une application de recherche visuelle qui retrouve n'importe quel élément dans des photos et des vidéos à partir d'une simple description, avec des scores de confiance fiables.",
     },
     stack: ["PyTorch", "YOLO-World", "Grounding DINO", "FastAPI"],
   },
@@ -157,7 +168,11 @@ const PROJECTS = [
   },
   {
     id: "cervical-cancer",
-    media: null,
+    media: {
+      type: "image",
+      src: "Assets/projects/cervical-cancer.jpg",
+      alt: { en: "Cervical cancer detection using AI", fr: "Détection du cancer du col de l'utérus par IA" },
+    },
     team: null,
     title: {
       en: "Cervical Cancer Detection",
